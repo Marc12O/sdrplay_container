@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
         sudo \
         udev \
         libusb-1.0-0-dev \
+        pkg-config \
   && rm -rf /var/lib/apt/lists/*
 WORKDIR /tmp/sdrlib
 RUN wget https://www.sdrplay.com/software/SDRplay_RSP_API-Linux-${MAJVERS}${MINVERS}.run && \
