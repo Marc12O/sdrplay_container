@@ -18,7 +18,7 @@ docker run --rm -p 1234:1234 -p 8080:8080 -p 8754:8754 -p 55132:55132 --privileg
 ```
 - SDRPlay rsp_tcp server (rtl_tcp compatible server)
 ```shell
-docker run -d -p 1234:1234 --privileged -v /dev/bus/usb:/dev/bus/usb f4fhh/sdrplay_container rsp_tcp -a 0.0.0.0
+docker run -d -p 1234:1234 --device=/dev/bus/usb f4fhh/sdrplay_container rsp_tcp -a 0.0.0.0
 ```
 - SoapyRemote server for both SDRPlay and RTL-SDR
 ```shell
