@@ -14,24 +14,24 @@ The container also support RTL-SDR dongles and dump1090/flightradar tools, it co
 ## Starting the container
 - Interactive access
 ```shell
-docker run --rm -p 1234:1234 -p 8080:8080 -p 8754:8754 -p 55132:55132 --privileged -v /dev/bus/usb:/dev/bus/usb -v  /mnt/user/appdata/fr24feed-piaware/config.js:/usr/lib/fr24/public_html/config.js -v /mnt/user/appdata/fr24feed-piaware/fr24feed.ini:/etc/fr24feed.ini -it sdrplay_container
+docker run --rm -p 1234:1234 -p 8080:8080 -p 8754:8754 -p 55132:55132 --privileged -v /dev/bus/usb:/dev/bus/usb -v  /mnt/user/appdata/fr24feed-piaware/config.js:/usr/lib/fr24/public_html/config.js -v /mnt/user/appdata/fr24feed-piaware/fr24feed.ini:/etc/fr24feed.ini -it f4fhh/sdrplay_container
 ```
 - SDRPlay rsp_tcp server (rtl_tcp compatible server)
 ```shell
-docker run -d -p 1234:1234 --privileged -v /dev/bus/usb:/dev/bus/usb sdrplay_container rsp_tcp -a 0.0.0.0
+docker run -d -p 1234:1234 --privileged -v /dev/bus/usb:/dev/bus/usb f4fhh/sdrplay_container rsp_tcp -a 0.0.0.0
 ```
 - SoapyRemote server for both SDRPlay and RTL-SDR
 ```shell
-docker run -d --network="host" --privileged -v /dev/bus/usb:/dev/bus/usb sdrplay_container SoapySDRServer --bind
+docker run -d --network="host" --privileged -v /dev/bus/usb:/dev/bus/usb f4fhh/sdrplay_container SoapySDRServer --bind
 ```
 The "host" networking mode is mandatory in this case as SoapySDRServer listens on dynamic UDP ports.
 - RTL-SDR rtl_tcp server
 ```shell
-docker run -d -p 1234:1234 --privileged -v /dev/bus/usb:/dev/bus/usb sdrplay_container rtl_tcp -a 0.0.0.0
+docker run -d -p 1234:1234 --privileged -v /dev/bus/usb:/dev/bus/usb f4fhh/sdrplay_container rtl_tcp -a 0.0.0.0
 ```
 - Dump1090 for SDRPlay
 ```shell
-docker run -d -p 8080:8080 --privileged -v /dev/bus/usb:/dev/bus/usb -v <path_to_your>/config.js:/usr/lib/fr24/public_html/config.js sdrplay_container /usr/lib/fr24/dump1090 --net --dev-sdrplay --normal --oversample
+docker run -d -p 8080:8080 --privileged -v /dev/bus/usb:/dev/bus/usb -v <path_to_your>/config.js:/usr/lib/fr24/public_html/config.js f4fhh/sdrplay_container /usr/lib/fr24/dump1090 --net --dev-sdrplay --normal --oversample
 ```
 dump1090 available command line options for the SDRPlay:
 ```
@@ -50,11 +50,11 @@ dump1090 available command line options for the SDRPlay:
 ```
 - Dump1090 for RTL-SDR
 ```shell
-docker run -d -p 8080:8080 --privileged -v /dev/bus/usb:/dev/bus/usb -v <path_to_your>/config.js:/usr/lib/fr24/public_html/config.js sdrplay_container /usr/lib/fr24/dump1090 --net
+docker run -d -p 8080:8080 --privileged -v /dev/bus/usb:/dev/bus/usb -v <path_to_your>/config.js:/usr/lib/fr24/public_html/config.js f4fhh/sdrplay_container /usr/lib/fr24/dump1090 --net
 ```
 - Flightradar24 for SDRPlay or RTL-SDR
 ```shell
-docker run -d -p 8080:8080 --privileged -v /dev/bus/usb:/dev/bus/usb -v <path_to_your>/config.js:/usr/lib/fr24/public_html/config.js -v <path_to_your>/fr24feed.ini:/etc/fr24feed.ini sdrplay_container /usr/lib/fr24/fr24feed
+docker run -d -p 8080:8080 --privileged -v /dev/bus/usb:/dev/bus/usb -v <path_to_your>/config.js:/usr/lib/fr24/public_html/config.js -v <path_to_your>/fr24feed.ini:/etc/fr24feed.ini f4fhh/sdrplay_container /usr/lib/fr24/fr24feed
 ```
 fr24feed.ini example:
 ```
